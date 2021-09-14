@@ -4,32 +4,35 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelButtonController : MonoBehaviour
+namespace Menu
 {
-    [SerializeField]
-    private /*TMP_Text*/ Text levelNumber;
-    [SerializeField]
-    private Image image;
-
-    public void Set(int buildIndex, Color textColor, /*TMP_FontAsset*/ Font font = null, Sprite sprite = null)
+    public class LevelButtonController : MonoBehaviour
     {
-        levelNumber.text = $"{buildIndex}";
-        levelNumber.color = textColor;
-        if (font != null)
+        [SerializeField]
+        private /*TMP_Text*/ Text levelNumber;
+        [SerializeField]
+        private Image image;
+
+        public void Set(int buildIndex, Color textColor, /*TMP_FontAsset*/ Font font = null, Sprite sprite = null)
         {
-            levelNumber.font = font;
+            levelNumber.text = $"{buildIndex}";
+            levelNumber.color = textColor;
+            if (font != null)
+            {
+                levelNumber.font = font;
+            }
+
+            if (sprite != null)
+            {
+                image.sprite = sprite;
+                image.type = Image.Type.Simple;
+                image.preserveAspect = true;
+            }
         }
 
-        if (sprite != null)
+        public void OnClick()
         {
-            image.sprite = sprite;
-            image.type = Image.Type.Simple;
-            image.preserveAspect = true;
+            SceneManager.LoadSceneAsync(Convert.ToInt32(levelNumber.text));
         }
-    }
-
-    public void OnClick()
-    {
-        SceneManager.LoadSceneAsync(Convert.ToInt32(levelNumber.text));
     }
 }
