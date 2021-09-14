@@ -1,8 +1,8 @@
 {
-	"name": "com.menu.unitypackage",
+	"name": "com.hc_package.unitypackage",
 	"version": "0.0.1",
-	"description": "Universal menu for hyper-casual games",	
-	"displayName": "Menu Package",
+	"description": "Universal tools for hyper-casual games",	
+	"displayName": "HC_Package",
 	"unity": "2020.3",
 	"dependencies": {
 
