@@ -1,7 +1,6 @@
-
-fileFormatVersion: 1
-guid: 75c4320d03b6542589c06409019188d4
-PackageManifestImporter:
+fileFormatVersion: 2
+guid: bb37aa093c9f9f24184b6e95fc479612
+TextScriptImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
