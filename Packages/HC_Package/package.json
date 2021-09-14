@@ -1,0 +1,11 @@
+{
+  "name": "com.cyclingbear.unitypackage",
+  "version": "0.0.1",
+  "description": "Universal tools for hyper-casual games",
+  "displayName": "HC_Package",
+  "unity": "2020.3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cycling-Bear-Studio/Util_UltimateLevelSelect.git"
+  }
+}
