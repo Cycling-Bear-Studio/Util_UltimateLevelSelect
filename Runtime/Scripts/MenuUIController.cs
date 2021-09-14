@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Menu
+namespace HC_Package
 {
     public class MenuUIController : MonoBehaviour
     {

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Menu
+namespace HC_Package
 {
     public class ImagesController : MonoBehaviour
     {

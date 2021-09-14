@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Menu
+namespace HC_Package
 {
     public class LevelButtonController : MonoBehaviour
     {
