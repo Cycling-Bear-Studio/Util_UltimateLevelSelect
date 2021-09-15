@@ -16,7 +16,7 @@ public class EditorWindowController : EditorWindow
 
         if(GUILayout.Button("Import"))
         {
-            AssetDatabase.ImportPackage("Packages/HC_Package/Editor/HC_Package.unitypackage", false);
+            AssetDatabase.ImportPackage("Packages/HC_Package/Editor/Scripts/HC_Package.unitypackage", false);
             //AssetDatabase.ImportPackage("Assets/HC_Package.unitypackage", false);
         }
     }
