@@ -28,7 +28,7 @@ public class EditorController : EditorWindow
 
                 if (GUILayout.Button("Import"))
                 {
-                    AssetDatabase.ImportPackage("Packages/HC_Package/Editor/HC_Package.unitypackage", false);  //In real package
+                    AssetDatabase.ImportPackage("Packages/com.hc_package.unitypackage/Editor/HC_Package.unitypackage", false);  //In real package
                     //AssetDatabase.ImportPackage("Assets/HC_Package.unitypackage", false);   //To test
 
                     window.Close();
