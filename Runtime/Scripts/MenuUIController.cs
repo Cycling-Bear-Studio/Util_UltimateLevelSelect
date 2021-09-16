@@ -5,97 +5,99 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace HC_Package
+public class MenuUIController : MonoBehaviour
 {
-    public class MenuUIController : MonoBehaviour
+    [Header("Blocks"), SerializeField]
+    private GameObject menuUI;
+    [SerializeField]
+    private GameObject levelsMenuUI;
+
+    [Header("Components"), SerializeField]
+    private RectTransform levelsContent;
+    [SerializeField]
+    private ImagesController imagesController;
+
+    [Header("Prefabs"), SerializeField]
+    private LevelButtonController levelButtonPrefab;
+
+    [Header("Variables"), /*Scene,*/ SerializeField]
+    private int firstLevelScene;
+
+    private List<int> levelsBuildIndexes = new List<int>();
+
+    private void Start()
     {
-        [Header("Blocks"), SerializeField]
-        private GameObject menuUI;
-        [SerializeField]
-        private GameObject levelsMenuUI;
+        ShowMenu();
 
-        [Header("Components"), SerializeField]
-        private RectTransform levelsContent;
-        [SerializeField]
-        private ImagesController imagesController;
+        GenerateLevelButtons();
+    }
 
-        [Header("Prefabs"), SerializeField]
-        private LevelButtonController levelButtonPrefab;
+    #region Clicked
 
-        [Header("Variables"), /*Scene,*/ SerializeField]
-        private int firstLevelScene;
+    public void OnStartClicked()
+    {
+        SceneManager.LoadSceneAsync(levelsBuildIndexes.First());
+    }
 
-        private List<int> levelsBuildIndexes = new List<int>();
+    public void OnLevelsClicked()
+    {
+        ShowLevelsMenu();
+    }
 
-        private void Start()
+    public void OnBackToMenuClicked()
+    {
+        ShowMenu();
+    }
+
+    public void OnExitClicked()
+    {
+        Application.Quit();
+    }
+
+    #endregion
+
+    #region Show
+
+    private void ShowMenu()
+    {
+        menuUI.SetActive(true);
+
+        levelsMenuUI.SetActive(false);
+    }
+
+    private void ShowLevelsMenu()
+    {
+        menuUI.SetActive(false);
+
+        levelsMenuUI.SetActive(true);
+    }
+
+    #endregion
+
+    private void GenerateLevelButtons()
+    {
+        foreach (var levelButton in levelsContent.GetComponentsInChildren<LevelButtonController>())
         {
-            ShowMenu();
-
-            GenerateLevelButtons();
+            Destroy(levelButton.gameObject);
         }
 
-        #region Clicked
-
-        public void OnStartClicked()
+        if (levelsBuildIndexes.Count == 0)
         {
-            SceneManager.LoadSceneAsync(levelsBuildIndexes.First());
+            GetLevelsBuildIndexes();
         }
 
-        public void OnLevelsClicked()
+        for (int i = 0; i < levelsBuildIndexes.Count(); i++)
         {
-            ShowLevelsMenu();
+            var newLevelButton = Instantiate(levelButtonPrefab, levelsContent);
+            newLevelButton.Set(levelsBuildIndexes[i], imagesController.GetTextColor(), imagesController.GetFont(), imagesController.GetLevelButtonSprite());
         }
+    }
 
-        public void OnBackToMenuClicked()
+    private void GetLevelsBuildIndexes()
+    {
+        for (int i = firstLevelScene + 1; i < SceneManager.sceneCountInBuildSettings; i++)
         {
-            ShowMenu();
-        }
-
-        #endregion
-
-        #region Show
-
-        private void ShowMenu()
-        {
-            menuUI.SetActive(true);
-
-            levelsMenuUI.SetActive(false);
-        }
-
-        private void ShowLevelsMenu()
-        {
-            menuUI.SetActive(false);
-
-            levelsMenuUI.SetActive(true);
-        }
-
-        #endregion
-
-        private void GenerateLevelButtons()
-        {
-            foreach (var levelButton in levelsContent.GetComponentsInChildren<LevelButtonController>())
-            {
-                Destroy(levelButton.gameObject);
-            }
-
-            if (levelsBuildIndexes.Count == 0)
-            {
-                GetLevelsBuildIndexes();
-            }
-
-            for (int i = 0; i < levelsBuildIndexes.Count(); i++)
-            {
-                var newLevelButton = Instantiate(levelButtonPrefab, levelsContent);
-                newLevelButton.Set(levelsBuildIndexes[i], imagesController.GetTextColor(), imagesController.GetFont(), imagesController.GetLevelButtonSprite());
-            }
-        }
-
-        private void GetLevelsBuildIndexes()
-        {
-            for (int i = firstLevelScene + 1; i < SceneManager.sceneCountInBuildSettings; i++)
-            {
-                levelsBuildIndexes.Add(i);
-            }
+            levelsBuildIndexes.Add(i);
         }
     }
 }
